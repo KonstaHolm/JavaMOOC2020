@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,11 +43,32 @@ public class Paaohjelma {
     }
 
     public static int perakkaishaku(ArrayList<Kirja> kirjat, int haettavaId) {
+        for (int i = 0; i < kirjat.size(); i++) {
+            if (kirjat.get(i).getId() == haettavaId) {
+                return i;
+            }
+        }
+
         return -1;
     }
 
     public static int binaarihaku(ArrayList<Kirja> kirjat, long haettavaId) {
+        int alku = 0;
+        int loppu = kirjat.size() - 1;
+
+        while (alku <= loppu) {
+            int keski = (alku + loppu) / 2;
+
+            int kirjanId = kirjat.get(keski).getId();
+            if (kirjanId == haettavaId) {
+                return keski;
+            } else if (kirjanId < haettavaId) {
+                alku = keski + 1;
+            } else {
+                loppu = keski - 1;
+            }
+        }
+
         return -1;
     }
 }
-
